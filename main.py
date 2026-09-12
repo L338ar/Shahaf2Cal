@@ -20,6 +20,7 @@ def escape_ics_text(text):
 
 
 def generate_ics(append_text=""):
+  counter = 0
   req = urllib.request.Request(URL, headers={'User-Agent': 'Mozilla/5.0'})
   with urllib.request.urlopen(req) as response:
     html_content = response.read().decode('utf-8')
@@ -78,8 +79,9 @@ def generate_ics(append_text=""):
         f'DESCRIPTION:{escape_ics_text(description)}',
         'END:VEVENT',
     ])
-
+    counter += 1
   ics_lines.append('END:VCALENDAR')
+  print (f"Generated {counter} events")
 
 #  filename = 'schedule_changes.ics'
 #  with open(filename, 'w', encoding='utf-8') as f:

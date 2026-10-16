@@ -92,6 +92,7 @@ def generate_ics(append_text=""):
 
 @app.route("/")
 def calendar_feed():
+  if not request.args.get('add'): return "", 404
   return Response(generate_ics(request.args.get('add')),mimetype='text/calendar',headers={'Content-Disposition': 'inline; filename="schedule.ics"'},)
 
 if __name__ == '__main__':
